@@ -13,6 +13,9 @@
 #include <iostream>
 #include <cmath>
 
+//Aggiunto come prova:
+#include <cstring>
+
 // yarp include
 #include <yarp/os/Bottle.h>
 #include <yarp/os/Time.h>
@@ -5571,28 +5574,87 @@ bool embObjMotionControl::getLastJointFaultRaw(int j, int& fault, std::string& m
 
     return true;
 }
+/*
+  bool embObjMotionControl::getRawData_core(std::string key, std::vector<std::int32_t> &data)
+  {
+      //Here I need to be sure 100% the key exists!!! 
+      // It must exists since the call is made while iterating over the map
+      data.clear();
+      for(int j=0; j< _njoints; j++)
+      {
+          eOmc_joint_status_additionalInfo_t addinfo;
+          eOprotID32_t protid = eoprot_ID_get(eoprot_endpoint_motioncontrol, eoprot_entity_mc_joint, j, eoprot_tag_mc_joint_status_addinfo_multienc);
+          if(!res->getLocalValue(protid, &addinfo))
+          {
+              return false;
+          }
 
-bool embObjMotionControl::getRawData_core(std::string key, std::vector<std::int32_t> &data)
-{
-    //Here I need to be sure 100% the key exists!!! 
-    // It must exists since the call is made while iterating over the map
-    data.clear();
-    for(int j=0; j< _njoints; j++)
-    {
-        eOmc_joint_status_additionalInfo_t addinfo;
-        eOprotID32_t protid = eoprot_ID_get(eoprot_endpoint_motioncontrol, eoprot_entity_mc_joint, j, eoprot_tag_mc_joint_status_addinfo_multienc);
-        if(!res->getLocalValue(protid, &addinfo))
+          for (int k = 0; k < std::size(addinfo.multienc); k++)
+          {
+              data.push_back((int32_t)addinfo.multienc[k]);
+          }
+      }
+      return true;
+  }
+*/
+//  bool embObjMotionControl::getRawData_core(std::string key, std::vector<std::int32_t> &data)
+//  {
+//      //Here I need to be sure 100% the key exists!!! 
+//      // It must exists since the call is made while iterating over the map
+//         data.clear();
+//         static int32_t  count = 0;
+//         for(int j=0; j< _njoints; j++)
+//         {
+//             data.push_back(count);
+//             count+=1;
+
+//             if(count > 99)
+//             {
+//                 count = 0;
+//             }
+
+//         }
+//     return true;
+//  }
+
+
+ bool embObjMotionControl::getRawData_core(std::string key, std::vector<std::int32_t> &data)
+ {
+     //Here I need to be sure 100% the key exists!!! 
+     // It must exists since the call is made while iterating over the map
+
+        data.clear();
+
+        static std::vector<std::int32_t> count_mult {0, 100};
+
+        for(int j=0; j< _njoints; j++)
         {
-            return false;
+
+            //int enc = j; -> Così facendo si itera sui giunti
+            //viene modificato solo il primo valore facendo push_back su [j]
+
+            for(int enc = 0; enc < 2; enc++)
+            {
+                data.push_back(count_mult[enc]);
+
+                count_mult[enc]+=1;
+
+                if(count_mult[0] > 99)
+                {
+                    count_mult[0] = 0;
+                }
+
+                if(count_mult[1] > 150)
+                {
+                    count_mult[1] = 0;
+                }
+
+            }
+    
         }
-        for (int k = 0; k < std::size(addinfo.multienc); k++)
-        {
-            data.push_back((int32_t)addinfo.multienc[k]);
-        }
-        
-    }
     return true;
-}
+ }
+
 
 bool embObjMotionControl::getRawDataMap(std::map<std::string, std::vector<std::int32_t>> &map)
 {
