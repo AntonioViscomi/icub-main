@@ -461,27 +461,27 @@ public:
     virtual bool getEncoderTypeName(uint32_t jomoId, eOmc_position_t pos, std::string &encoderTypeName) override;
 
     /////////   PID INTERFACE   /////////
-    virtual bool setPidRaw(const PidControlTypeEnum& pidtype, int j, const Pid &pid) override;
-    virtual bool setPidsRaw(const PidControlTypeEnum& pidtype, const Pid *pids) override;
-    virtual bool setPidReferenceRaw(const PidControlTypeEnum& pidtype, int j, double ref) override;
-    virtual bool setPidReferencesRaw(const PidControlTypeEnum& pidtype, const double *refs) override;
-    virtual bool setPidErrorLimitRaw(const PidControlTypeEnum& pidtype, int j, double limit) override;
-    virtual bool setPidErrorLimitsRaw(const PidControlTypeEnum& pidtype, const double *limits) override;
-    virtual bool getPidErrorRaw(const PidControlTypeEnum& pidtype, int j, double *err) override;
-    virtual bool getPidErrorsRaw(const PidControlTypeEnum& pidtype, double *errs) override;
-    virtual bool getPidOutputRaw(const PidControlTypeEnum& pidtype, int j, double *out) override;
-    virtual bool getPidOutputsRaw(const PidControlTypeEnum& pidtype, double *outs) override;
-    virtual bool getPidRaw(const PidControlTypeEnum& pidtype, int j, Pid *pid) override;
-    virtual bool getPidsRaw(const PidControlTypeEnum& pidtype, Pid *pids) override;
-    virtual bool getPidReferenceRaw(const PidControlTypeEnum& pidtype, int j, double *ref) override;
-    virtual bool getPidReferencesRaw(const PidControlTypeEnum& pidtype, double *refs) override;
-    virtual bool getPidErrorLimitRaw(const PidControlTypeEnum& pidtype, int j, double *limit) override;
-    virtual bool getPidErrorLimitsRaw(const PidControlTypeEnum& pidtype, double *limits) override;
-    virtual bool resetPidRaw(const PidControlTypeEnum& pidtype, int j) override;
-    virtual bool disablePidRaw(const PidControlTypeEnum& pidtype, int j) override;
-    virtual bool enablePidRaw(const PidControlTypeEnum& pidtype, int j) override;
-    virtual bool setPidOffsetRaw(const PidControlTypeEnum& pidtype, int j, double v) override;
-    virtual bool isPidEnabledRaw(const PidControlTypeEnum& pidtype, int j, bool* enabled) override;
+    virtual yarp::dev::ReturnValue setPidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, const Pid &pid) override;
+    virtual yarp::dev::ReturnValue setPidsRaw(const yarp::dev::PidControlTypeEnum& pidtype, const Pid *pids) override;
+    virtual bool setPidReferenceRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double ref) override;
+    virtual bool setPidReferencesRaw(const yarp::dev::PidControlTypeEnum& pidtype, const double *refs) override;
+    virtual bool setPidErrorLimitRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double limit) override;
+    virtual bool setPidErrorLimitsRaw(const yarp::dev::PidControlTypeEnum& pidtype, const double *limits) override;
+    virtual bool getPidErrorRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double *err) override;
+    virtual bool getPidErrorsRaw(const yarp::dev::PidControlTypeEnum& pidtype, double *errs) override;
+    virtual bool getPidOutputRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double *out) override;
+    virtual bool getPidOutputsRaw(const yarp::dev::PidControlTypeEnum& pidtype, double *outs) override;
+    virtual yarp::dev::ReturnValue getPidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, Pid *pid) override;
+    virtual yarp::dev::ReturnValue getPidsRaw(const yarp::dev::PidControlTypeEnum& pidtype, Pid *pids) override;
+    virtual bool getPidReferenceRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double *ref) override;
+    virtual bool getPidReferencesRaw(const yarp::dev::PidControlTypeEnum& pidtype, double *refs) override;
+    virtual bool getPidErrorLimitRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double *limit) override;
+    virtual bool getPidErrorLimitsRaw(const yarp::dev::PidControlTypeEnum& pidtype, double *limits) override;
+    virtual yarp::dev::ReturnValue resetPidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j) override;
+    virtual yarp::dev::ReturnValue disablePidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j) override;
+    virtual yarp::dev::ReturnValue enablePidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j) override;
+    virtual yarp::dev::ReturnValue setPidOffsetRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double v) override;
+    virtual yarp::dev::ReturnValue isPidEnabledRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, bool& enabled) override;
 
     // POSITION CONTROL INTERFACE RAW
     virtual bool getAxes(int *ax) override;

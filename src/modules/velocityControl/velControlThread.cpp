@@ -134,7 +134,7 @@ void velControlThread::run()
                 if (fabs(targets(i)-encoders(i))>6.0)
                     ipos->positionMove(i,targets(i));
                 else
-                    ipid->setPidReference(yarp::dev::VOCAB_PIDTYPE_POSITION,i,targets(i));
+                    ipid->setPidReference(PidControlTypeEnum::VOCAB_PIDTYPE_POSITION,i,targets(i));
             }
         }
         else

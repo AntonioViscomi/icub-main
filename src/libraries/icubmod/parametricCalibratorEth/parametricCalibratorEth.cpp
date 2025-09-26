@@ -968,7 +968,7 @@ bool parametricCalibratorEth::checkGoneToZeroThreshold(int j, std::list<int> &fa
         iEncoders->getEncoder(j, &angj);
         iPosition->checkMotionDone(j, &done);
         iControlMode->getControlMode(j, &mode);
-        iPids->getPidOutput(VOCAB_PIDTYPE_POSITION,j, &output);
+        iPids->getPidOutput(PidControlTypeEnum::VOCAB_PIDTYPE_POSITION,j, &output);
         
         if((skipReCalibration) && (mode == VOCAB_CM_IDLE))
         {

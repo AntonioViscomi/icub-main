@@ -733,7 +733,7 @@ bool parametricCalibrator::checkGoneToZeroThreshold(int j)
         iEncoders->getEncoder(j, &angj);
         iPosition->checkMotionDone(j, &done);
         iControlMode->getControlMode(j, &mode);
-        iPids->getPidOutput(VOCAB_PIDTYPE_POSITION, j, &output);
+        iPids->getPidOutput(PidControlTypeEnum::VOCAB_PIDTYPE_POSITION, j, &output);
 
         delta = fabs(angj-zeroPos[j]);
         yDebug("%s: checkGoneToZeroThreshold: joint: %d curr: %.3f des: %.3f -> delta: %.3f threshold: %.3f output: %.3f mode: %s" ,deviceName.c_str(),j,angj, zeroPos[j],delta, zeroPosThreshold[j], output, yarp::os::Vocab32::decode(mode).c_str());
