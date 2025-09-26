@@ -26,6 +26,8 @@
 #include <yarp/os/NetType.h>
 #include <yarp/dev/ControlBoardHelper.h>
 
+#include <yarp/dev/ReturnValue.h>
+
 // local include
 #include "EoCommon.h"
 #include "EOarray.h"
@@ -52,17 +54,7 @@ using namespace yarp::dev::eomc;
 #define PARSER_MOTION_CONTROL_VERSION   6
 
 
-static inline bool YARP_METHOD_NOT_YET_IMPLEMENTED(const char *txt)
-{
-    yErrorOnce() << txt << " is not yet implemented for embObjMotionControl";
-    return true;
-}
 
-static inline bool YARP_METHOD_DEPRECATED(const char *txt)
-{
-    yErrorOnce() << txt << " has been YARP_METHOD_DEPRECATED for embObjMotionControl";
-    return true;
-}
 
 #define NV_NOT_FOUND    return nv_not_found();
 
@@ -1850,7 +1842,7 @@ ReturnValue embObjMotionControl::setPidRaw(const PidControlTypeEnum& pidtype, in
             helper_setCurPidRaw(j,pid);
         break;
         default:
-            yError()<<"Invalid pidtype:"<<pidtype;
+            yError()<<"Invalid pidtype:"<<static_cast<int>(pidtype);
         break;
     }
     return ReturnValue::return_code::return_value_ok;
@@ -1874,7 +1866,7 @@ ReturnValue embObjMotionControl::getPidRaw(const PidControlTypeEnum& pidtype, in
             helper_getCurPidRaw(axis,pid);
         break;
         default:
-            yError()<<"Invalid pidtype:"<<pidtype;
+            yError()<<"Invalid pidtype:"<<static_cast<int>(pidtype);
         break;
     }
     return ReturnValue::return_code::return_value_ok;
@@ -1992,7 +1984,7 @@ bool embObjMotionControl::getPidErrorRaw(const PidControlTypeEnum& pidtype, int 
         break;
         default:
         {
-            yError()<<"Invalid pidtype:"<<pidtype;
+            yError()<<"Invalid pidtype:"<<static_cast<int>(pidtype);
         }
         break;
     }
@@ -2078,7 +2070,7 @@ ReturnValue embObjMotionControl::getPidsRaw(const PidControlTypeEnum& pidtype, P
             helper_getSpdPidsRaw(pids);
             break;
         default:
-            yError()<<"Invalid pidtype:"<<pidtype;
+            yError()<<"Invalid pidtype:"<<static_cast<int>(pidtype);
             break;
     }
     return ReturnValue::return_code::return_value_ok;
@@ -2106,7 +2098,7 @@ bool embObjMotionControl::getPidReferenceRaw(const PidControlTypeEnum& pidtype, 
         //case PidControlTypeEnum::VOCAB_PIDTYPE_DIRECT:
         //{
         //    *ref=0;
-        //    YARP_METHOD_NOT_YET_IMPLEMENTED();
+    //    YARP_METHOD_NOT_YET_IMPLEMENTED();
         //}
         //break;
         case PidControlTypeEnum::VOCAB_PIDTYPE_TORQUE:
@@ -2130,7 +2122,7 @@ bool embObjMotionControl::getPidReferenceRaw(const PidControlTypeEnum& pidtype, 
         default:
         {
             *ref=0;
-            yError()<<"Invalid pidtype:"<<pidtype;
+            yError()<<"Invalid pidtype:"<<static_cast<int>(pidtype);
         }
         break;
     }
@@ -4916,7 +4908,7 @@ bool embObjMotionControl::getPidOutputRaw(const PidControlTypeEnum& pidtype, int
             *out = 0;
             break;
         default:
-            yError()<<"Invalid pidtype:"<<pidtype;
+            yError()<<"Invalid pidtype:"<<static_cast<int>(pidtype);
         break;
     }
     return true;
@@ -4932,7 +4924,7 @@ bool embObjMotionControl::getPidOutputsRaw(const PidControlTypeEnum& pidtype, do
     return ret;
 }
 
-ReturnValue embObjMotionControl::isPidEnabledRaw(const PidControlTypeEnum& pidtype, int j, bool* enabled)
+ReturnValue embObjMotionControl::isPidEnabledRaw(const PidControlTypeEnum& pidtype, int j, bool& enabled)
 {
     return YARP_METHOD_NOT_YET_IMPLEMENTED();
 }

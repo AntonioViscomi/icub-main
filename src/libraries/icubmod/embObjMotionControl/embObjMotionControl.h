@@ -481,7 +481,12 @@ public:
     virtual yarp::dev::ReturnValue disablePidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j) override;
     virtual yarp::dev::ReturnValue enablePidRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j) override;
     virtual yarp::dev::ReturnValue setPidOffsetRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, double v) override;
+    virtual yarp::dev::ReturnValue setPidFeedforwardRaw(const yarp::dev::PidControlTypeEnum& pidtype,int j, double v) override;
+    virtual yarp::dev::ReturnValue getPidOffsetRaw(const yarp::dev::PidControlTypeEnum& pidtype,int j, double& v) override;
+    virtual yarp::dev::ReturnValue getPidFeedforwardRaw(const yarp::dev::PidControlTypeEnum& pidtype,int j, double& v) override;
     virtual yarp::dev::ReturnValue isPidEnabledRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, bool& enabled) override;
+    virtual yarp::dev::ReturnValue getPidExtraInfoRaw(const yarp::dev::PidControlTypeEnum& pidtype, int j, yarp::dev::PidExtraInfo& units) override;
+    virtual yarp::dev::ReturnValue getPidExtraInfosRaw(const yarp::dev::PidControlTypeEnum& pidtype, std::vector<yarp::dev::PidExtraInfo>& units) override;
 
     // POSITION CONTROL INTERFACE RAW
     virtual bool getAxes(int *ax) override;
